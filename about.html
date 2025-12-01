@@ -3,13 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Us — Sopno Puron Foundation</title>
+<title>About Us - Sopno Puron Foundation</title>
 <link rel="stylesheet" href="style.css">
 <script src="script.js" defer></script>
 <script src="firebase.js"></script>
+<style>
+.section h2 { color: #1e90ff; margin-bottom: 15px; text-align: center; }
+.section p { font-size: 16px; line-height: 1.6; margin-bottom: 12px; }
+</style>
 </head>
 <body>
-
 <header>
 <img src="images/logo.png" alt="Logo">
 <h1>Sopno Puron Foundation</h1>
@@ -25,21 +28,21 @@
 
 <div class="section">
 <h2>আমাদের সম্পর্কে</h2>
-<p>
-Sopno Puron Foundation একটি স্বেচ্ছাসেবী সংস্থা যা দরিদ্র ও অসহায় মানুষের জীবনমান উন্নয়নের জন্য কাজ করে।  
-আমাদের মূল লক্ষ্য হলো শিক্ষা, স্বাস্থ্য, খাদ্য, আবাসন এবং সামাজিক উন্নয়ন নিশ্চিত করা।
-</p>
-<p>
-আমরা বিশ্বাস করি—একসাথে কাজ করলে মানবতার স্বপ্ন পূরণ সম্ভব।
-</p>
+<p><strong>Sopno Puron Foundation</strong> একটি অলাভজনক সংস্থা যা মানব কল্যাণ, শিক্ষা, স্বাস্থ্য, দুর্যোগ সহায়তা, রক্তদাতা নেটওয়ার্ক ও মহিলা/শিশুদের উন্নয়নে কাজ করে।</p>
+<p>আমাদের লক্ষ্য হলো সমাজের অসহায় মানুষদের সহায়তা প্রদান করা, শিক্ষিত ও সচেতন সমাজ গঠন করা এবং মানবিক কার্যক্রমের মাধ্যমে জীবনকে উন্নত করা।</p>
+<p>আমরা নিয়মিত বিভিন্ন প্রোগ্রাম ও ক্যাম্পের মাধ্যমে সমাজের যেকোনো অংশে সহায়তা পৌঁছে দেই।</p>
 
-<button class="cta-buttons" onclick="sharePage()">Share This Website</button>
+<button class="share-btn-desktop" onclick="sharePage()">Share This Website</button>
+<div class="share-dropdown">
+<span style="font-size:25px;cursor:pointer;">⋮</span>
+<div class="share-dropdown-content">
+<button onclick="sharePage()">Share Website</button>
+</div>
+</div>
 </div>
 
 <footer>
-Developed by 
-<a href="https://facebook.com/rafahimn" target="_blank">RA Fahim</a>
+Developed by <a href="https://facebook.com/rafahimn" target="_blank">RA Fahim</a>
 </footer>
-
 </body>
 </html>
