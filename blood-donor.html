@@ -1,1 +1,68 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blood Donor — Sopno Puron Foundation</title>
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+<script src="firebase.js"></script>
+</head>
+<body>
 
+<header>
+<img src="images/logo.png" alt="Logo">
+<h1>Sopno Puron Foundation</h1>
+<span class="menu-icon" onclick="toggleMenu()">☰</span>
+</header>
+
+<nav id="mobileMenu">
+<a href="index.html">Home</a>
+<a href="about.html">About Us</a>
+<a href="work.html">Our Work</a>
+<a href="contact.html">Contact</a>
+</nav>
+
+<div class="section">
+<h2>Blood Donor Registration</h2>
+<p>রক্তদাতা হিসেবে নিবন্ধন করুন:</p>
+
+<form onsubmit="submitDonor(event)">
+    <input id="donor_fullname" type="text" placeholder="আপনার নাম" required>
+    <input id="donor_phone_b" type="text" placeholder="মোবাইল নাম্বার" required>
+    <select id="donor_group" required>
+        <option value="">রক্তের গ্রুপ</option>
+        <option>A+</option><option>A-</option>
+        <option>B+</option><option>B-</option>
+        <option>O+</option><option>O-</option>
+        <option>AB+</option><option>AB-</option>
+    </select>
+    <button type="submit">Register</button>
+</form>
+
+<button class="cta-buttons" onclick="sharePage()">Share This Website</button>
+</div>
+
+<footer>
+Developed by 
+<a href="https://facebook.com/rafahimn" target="_blank">RA Fahim</a>
+</footer>
+
+<script>
+function submitDonor(e){
+  e.preventDefault();
+  if(!window.db) return showAlert('Firebase not ready');
+  db.collection('blood_donors').add({
+    name: document.getElementById('donor_fullname').value.trim(),
+    phone: document.getElementById('donor_phone_b').value.trim(),
+    group: document.getElementById('donor_group').value,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  }).then(()=>{ 
+    alert('Thanks — donor registered'); 
+    e.target.reset(); 
+  }).catch(err=>showAlert(err.message));
+}
+</script>
+
+</body>
+</html>
