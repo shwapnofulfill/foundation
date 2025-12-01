@@ -3,10 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Volunteer - Sopno Puron Foundation</title>
+<title>Volunteer - সপ্নো পূরণ ফাউন্ডেশন</title>
 <link rel="stylesheet" href="style.css">
 <script src="firebase.js"></script>
+<style>
+body { font-family: Arial,sans-serif; margin:0; padding:0; background:#f9f9f9; color:#333; }
+header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background-color:#4CAF50;
+  color:white;
+  padding:10px 20px;
+}
+header img { height:60px; }
+header h1 { margin-left:10px; font-size:1.5rem; }
+.menu-icon { font-size:1.5rem; cursor:pointer; display:none; }
+
+nav { background-color:#2e7d32; display:flex; justify-content:center; }
+nav a { color:white; text-decoration:none; padding:10px 20px; display:block; }
+nav a:hover { background-color:#1b5e20; }
+
+.section { max-width:480px; margin:30px auto; padding:20px; background:#fff; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
+.section h2 { text-align:center; margin-bottom:15px; color:#1e90ff; }
+
+form input, form textarea, form button { width:100%; margin-bottom:12px; padding:10px; border-radius:6px; border:1px solid #ccc; }
+form button { background:#1e90ff; color:white; border:none; cursor:pointer; }
+
+footer { text-align:center; padding:15px; background:#2e7d32; color:white; }
+
+/* Responsive */
+@media(max-width:768px){
+  .menu-icon { display:block; }
+  nav { display:none; flex-direction:column; }
+  nav a { border-top:1px solid #1b5e20; }
+}
+</style>
 <script>
+// Mobile menu toggle
+function toggleMenu(){
+  const menu = document.getElementById('mobileMenu');
+  menu.style.display = menu.style.display==='flex'?'none':'flex';
+}
+
+// Volunteer form submit
 function submitVolunteer(e){
   e.preventDefault();
   if(!window.db) return alert('Firebase not ready');
@@ -23,17 +63,13 @@ function submitVolunteer(e){
   }).catch(err=>alert(err.message));
 }
 </script>
-<style>
-form{max-width:480px;margin:20px auto;padding:20px;background:#fff;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.1);}
-input,textarea,select,button{width:100%;margin-bottom:12px;padding:10px;border-radius:6px;border:1px solid #ccc;}
-button{background:#1e90ff;color:#fff;border:none;cursor:pointer;}
-</style>
 </head>
 <body>
+
 <header>
-<img src="images/logo.png" alt="Logo">
-<h1>Sopno Puron Foundation</h1>
-<span class="menu-icon" onclick="toggleMenu()">☰</span>
+  <img src="logoo.png" alt="Logo">
+  <h1>Sopno Puron Foundation</h1>
+  <span class="menu-icon" onclick="toggleMenu()">☰</span>
 </header>
 
 <nav id="mobileMenu">
@@ -42,24 +78,22 @@ button{background:#1e90ff;color:#fff;border:none;cursor:pointer;}
   <a href="work.html">Our Work</a>
   <a href="contact.html">Contact</a>
   <a href="donate.html">Donate</a>
-  <a href="volunteer.html">Volunteer</a>
-</nav>
-
 </nav>
 
 <div class="section">
-<h2>Volunteer Registration</h2>
-<form onsubmit="submitVolunteer(event)">
-<input id="vol_name" placeholder="Full Name" required>
-<input id="vol_phone" placeholder="Phone Number" required>
-<input id="vol_address" placeholder="Address" required>
-<textarea id="vol_skills" placeholder="Skills / Interests"></textarea>
-<button type="submit">Submit</button>
-</form>
+  <h2>Volunteer Registration</h2>
+  <form onsubmit="submitVolunteer(event)">
+    <input id="vol_name" placeholder="Full Name" required>
+    <input id="vol_phone" placeholder="Phone Number" required>
+    <input id="vol_address" placeholder="Address" required>
+    <textarea id="vol_skills" placeholder="Skills / Interests"></textarea>
+    <button type="submit">Submit</button>
+  </form>
 </div>
 
 <footer>
-Developed by <a href="https://facebook.com/rafahimn" target="_blank">RA Fahim</a>
+  Developed by <a href="https://facebook.com/rafahimn" target="_blank">RA Fahim</a>
 </footer>
+
 </body>
 </html>
