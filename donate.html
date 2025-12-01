@@ -1,1 +1,73 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donate — Sopno Puron Foundation</title>
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+<script src="firebase.js"></script>
+</head>
+<body>
 
+<header>
+<img src="images/logo.png" alt="Logo">
+<h1>Sopno Puron Foundation</h1>
+<span class="menu-icon" onclick="toggleMenu()">☰</span>
+</header>
+
+<nav id="mobileMenu">
+<a href="index.html">Home</a>
+<a href="about.html">About Us</a>
+<a href="work.html">Our Work</a>
+<a href="contact.html">Contact</a>
+</nav>
+
+<div class="section">
+<h2>Donate</h2>
+<p>আপনার অনুদান মানবতার কাজে ব্যবহার হবে।</p>
+
+<form onsubmit="submitDonate(event)">
+    <input id="donor_name" type="text" placeholder="আপনার নাম" required>
+    <input id="donor_phone" type="text" placeholder="মোবাইল নাম্বার" required>
+    <input id="donation_amount" type="number" placeholder="পরিমাণ (৳)" required>
+    <select id="donation_method">
+        <option>Bkash</option>
+        <option>Nagad</option>
+        <option>Rocket</option>
+    </select>
+    <button type="submit">Donate Now</button>
+</form>
+
+<p id="donate_note" class="small"></p>
+<button class="cta-buttons" onclick="sharePage()">Share This Website</button>
+</div>
+
+<footer>
+Developed by 
+<a href="https://facebook.com/rafahimn" target="_blank">RA Fahim</a>
+</footer>
+
+<script>
+function submitDonate(e){
+    e.preventDefault();
+    const name = document.getElementById('donor_name').value.trim();
+    const phone = document.getElementById('donor_phone').value.trim();
+    const amount = Number(document.getElementById('donation_amount').value);
+    const method = document.getElementById('donation_method').value;
+
+    if(!window.db){ showAlert('Firebase not ready yet'); return; }
+
+    db.collection('donations').add({
+      name, phone, amount, method, createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(()=>{
+      document.getElementById('donate_note').textContent = 'ধন্যবাদ — আপনার অনুদান রেকর্ড করা হয়েছে।';
+      e.target.reset();
+    }).catch(err=>{
+      showAlert('Error saving donation: '+err.message);
+    });
+}
+</script>
+
+</body>
+</html>
