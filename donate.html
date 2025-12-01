@@ -3,13 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Donate — Sopno Puron Foundation</title>
+<title>Donate - Sopno Puron Foundation</title>
 <link rel="stylesheet" href="style.css">
-<script src="script.js" defer></script>
 <script src="firebase.js"></script>
+<script>
+function submitDonate(e){
+  e.preventDefault();
+  if(!window.db){ alert('Firebase not ready'); return; }
+  const name = document.getElementById('donor_name').value.trim();
+  const phone = document.getElementById('donor_phone').value.trim();
+  const amount = Number(document.getElementById('donation_amount').value);
+  const method = document.getElementById('donation_method').value;
+  db.collection('donations').add({
+    name, phone, amount, method, createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  }).then(()=>{
+    document.getElementById('donate_note').textContent='ধন্যবাদ — আপনার অনুদান রেকর্ড করা হয়েছে।';
+    e.target.reset();
+  }).catch(err=> alert('Error saving donation: '+err.message));
+}
+</script>
+<style>
+form{max-width:480px;margin:20px auto;padding:20px;background:#fff;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+input,textarea,select,button{width:100%;margin-bottom:12px;padding:10px;border-radius:6px;border:1px solid #ccc;}
+button{background:#1e90ff;color:#fff;border:none;cursor:pointer;}
+</style>
 </head>
 <body>
-
 <header>
 <img src="images/logo.png" alt="Logo">
 <h1>Sopno Puron Foundation</h1>
@@ -25,49 +44,22 @@
 
 <div class="section">
 <h2>Donate</h2>
-<p>আপনার অনুদান মানবতার কাজে ব্যবহার হবে।</p>
-
 <form onsubmit="submitDonate(event)">
-    <input id="donor_name" type="text" placeholder="আপনার নাম" required>
-    <input id="donor_phone" type="text" placeholder="মোবাইল নাম্বার" required>
-    <input id="donation_amount" type="number" placeholder="পরিমাণ (৳)" required>
-    <select id="donation_method">
-        <option>Bkash</option>
-        <option>Nagad</option>
-        <option>Rocket</option>
-    </select>
-    <button type="submit">Donate Now</button>
+<input id="donor_name" placeholder="Full Name" required>
+<input id="donor_phone" placeholder="Phone Number" required>
+<input id="donation_amount" placeholder="Amount (৳)" type="number" required>
+<select id="donation_method">
+<option>Bkash</option>
+<option>Nagad</option>
+<option>Rocket</option>
+</select>
+<button type="submit">Donate Now</button>
 </form>
-
-<p id="donate_note" class="small"></p>
-<button class="cta-buttons" onclick="sharePage()">Share This Website</button>
+<p id="donate_note" style="color:green;font-weight:bold;"></p>
 </div>
 
 <footer>
-Developed by 
-<a href="https://facebook.com/rafahimn" target="_blank">RA Fahim</a>
+Developed by <a href="https://facebook.com/rafahimn" target="_blank">RA Fahim</a>
 </footer>
-
-<script>
-function submitDonate(e){
-    e.preventDefault();
-    const name = document.getElementById('donor_name').value.trim();
-    const phone = document.getElementById('donor_phone').value.trim();
-    const amount = Number(document.getElementById('donation_amount').value);
-    const method = document.getElementById('donation_method').value;
-
-    if(!window.db){ showAlert('Firebase not ready yet'); return; }
-
-    db.collection('donations').add({
-      name, phone, amount, method, createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    }).then(()=>{
-      document.getElementById('donate_note').textContent = 'ধন্যবাদ — আপনার অনুদান রেকর্ড করা হয়েছে।';
-      e.target.reset();
-    }).catch(err=>{
-      showAlert('Error saving donation: '+err.message);
-    });
-}
-</script>
-
 </body>
 </html>
