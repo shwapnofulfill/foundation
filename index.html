@@ -8,124 +8,57 @@
 <script src="firebase.js"></script>
 <script src="script.js" defer></script>
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
+body { font-family: Arial,sans-serif; margin:0; padding:0; color:#333; background:#f9f9f9; }
 
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-  }
+header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background-color:#4CAF50;
+  color:white;
+  padding:10px 20px;
+}
 
-  header img {
-    height: 50px;
-  }
+header img { height:50px; }
+header h1 { margin-left:10px; font-size:1.5rem; }
+.menu-icon { font-size:1.5rem; cursor:pointer; display:none; }
 
-  header h1 {
-    margin: 0 10px;
-    font-size: 1.5rem;
-  }
+nav { background-color:#2e7d32; display:flex; justify-content:center; }
+nav a { color:white; text-decoration:none; padding:10px 20px; display:block; }
+nav a:hover { background-color:#1b5e20; }
 
-  .menu-icon {
-    font-size: 1.5rem;
-    cursor: pointer;
-    display: none;
-  }
+/* Hero */
+.hero { text-align:center; padding:50px 20px; background:#4CAF50; color:white; }
+.hero h2 { font-size:2rem; margin-bottom:10px; }
+.hero p { font-size:1.2rem; }
 
-  nav {
-    background-color: #2e7d32;
-    display: flex;
-    justify-content: center;
-  }
+/* Sections */
+.section { max-width:900px; margin:30px auto; padding:20px; background:#fff; border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,0.1); }
+.section h2 { text-align:center; margin-bottom:15px; color:#1e90ff; }
+.work-card { background:#f1f1f1; padding:20px; margin:15px 0; border-radius:10px; box-shadow:0 3px 6px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; }
+.work-card:hover { transform:translateY(-5px); box-shadow:0 6px 12px rgba(0,0,0,0.15); }
+.work-card h3 { color:#2e7d32; margin-bottom:10px; }
 
-  nav a {
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    display: block;
-  }
+/* Desktop Share */
+.share-desktop { position: fixed; top:20px; right:20px; font-size:14px; color:#4CAF50; cursor:pointer; z-index:1000; }
 
-  nav a:hover {
-    background-color: #1b5e20;
-  }
+/* Mobile 3-dot Share */
+.share-dropdown { position:fixed; bottom:20px; right:20px; display:none; flex-direction:column; align-items:flex-end; z-index:1000; }
+.share-dropdown span { font-size:2rem; cursor:pointer; color:#4CAF50; }
+.share-dropdown button { display:none; margin-top:5px; padding:10px 15px; border:none; border-radius:5px; background:#4CAF50; color:white; cursor:pointer; box-shadow:0 3px 6px rgba(0,0,0,0.1); transition: background 0.3s; }
+.share-dropdown button:hover { background:#388E3C; }
 
-  .hero {
-    text-align: center;
-    padding: 50px 20px;
-    background: url('images/hero-bg.jpg') center/cover no-repeat;
-    color: white;
-  }
+/* Footer */
+footer { text-align:center; padding:15px; background:#2e7d32; color:white; }
 
-  .section {
-    padding: 30px 20px;
-    max-width: 900px;
-    margin: auto;
-  }
-
-  .work-card {
-    background-color: #f1f1f1;
-    padding: 15px 20px;
-    margin: 15px 0;
-    border-radius: 8px;
-  }
-
-  .share-dropdown {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    display: none;
-    flex-direction: column;
-    align-items: flex-end;
-  }
-
-  .share-dropdown span {
-    font-size: 2rem;
-    cursor: pointer;
-  }
-
-  .share-dropdown button {
-    margin-top: 5px;
-    padding: 8px 12px;
-    border: none;
-    background-color: #4CAF50;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  footer {
-    text-align: center;
-    padding: 15px;
-    background-color: #2e7d32;
-    color: white;
-  }
-
-  /* Responsive */
-  @media (max-width: 768px) {
-    .menu-icon {
-      display: block;
-    }
-
-    nav {
-      display: none;
-      flex-direction: column;
-    }
-
-    nav a {
-      padding: 10px;
-      border-top: 1px solid #1b5e20;
-    }
-
-    .share-dropdown {
-      display: flex;
-    }
-  }
+/* Responsive */
+@media(max-width:768px){
+  .menu-icon { display:block; }
+  nav { display:none; flex-direction:column; }
+  nav a { border-top:1px solid #1b5e20; }
+  .share-desktop { display:none; }
+  .share-dropdown { display:flex; }
+}
 </style>
 </head>
 <body>
@@ -141,7 +74,12 @@
   <a href="about.html">About Us</a>
   <a href="work.html">Our Work</a>
   <a href="contact.html">Contact</a>
+  <a href="donate.html">Donate</a>
+  <a href="volunteer.html">Volunteer</a>
 </nav>
+
+<!-- Desktop Share -->
+<div class="share-desktop" onclick="sharePage()">Share</div>
 
 <div class="hero">
   <h2>আমরা স্বপ্ন পূরণের পথে</h2>
@@ -149,63 +87,23 @@
 </div>
 
 <div class="section">
-  <h2>Welcome to Sopno Puron Foundation</h2>
-  <p>Our mission is to help people in need—health, food, education, shelter & social development.</p>
-</div>
-
-<!-- Work Summary Section -->
-<div class="section">
   <h2>আমাদের কাজের সংক্ষিপ্ত বিবরণ</h2>
-
   <div class="work-card">
     <h3>খাদ্য সহায়তা</h3>
     <p>রাস্তায় থাকা মানুষ ও দুর্যোগে ক্ষতিগ্রস্ত পরিবারদের জন্য খাবার বিতরণ।</p>
   </div>
-
   <div class="work-card">
     <h3>শিক্ষা সহায়তা</h3>
     <p>অসহায় শিক্ষার্থীদের স্কুল সামগ্রী, বৃত্তি, ফ্রি টিউশন এবং ভর্তি সহায়তা।</p>
   </div>
-
   <div class="work-card">
     <h3>স্বাস্থ্যসেবা</h3>
     <p>ফ্রি মেডিকেল ক্যাম্প, ব্লাড ডোনেশন এবং স্বাস্থ্য সচেতনতা কার্যক্রম।</p>
   </div>
-
-  <div class="work-card">
-    <h3>শীতবস্ত্র ও পোশাক বিতরণ</h3>
-    <p>শীতকালে কম্বল ও পোশাক বিতরণ, অসহায় পরিবারের সহায়তা।</p>
-  </div>
-
-  <div class="work-card">
-    <h3>মহিলা ও শিশু সহায়তা</h3>
-    <p>বিধবা ও শিশুদের জন্য আর্থিক সহায়তা, খাবার, খেলনা ও শিক্ষা কার্যক্রম।</p>
-  </div>
-
-  <div class="work-card">
-    <h3>দুর্যোগ সহায়তা</h3>
-    <p>বন্যা, ঝড়, অগ্নিকাণ্ডে দ্রুত সহায়তা এবং নিত্যপ্রয়োজনীয় সামগ্রী বিতরণ।</p>
-  </div>
-
-  <div class="work-card">
-    <h3>রক্তদাতা টিম</h3>
-    <p>জরুরি সময়ে মানুষকে রক্ত দেওয়া, অনলাইনে রক্তদাতার লিস্ট, নিয়মিত ব্লাড ডোনেশন ড্রাইভ।</p>
-  </div>
-
-  <div class="work-card">
-    <h3>কর্মসংস্থান ও স্কিল সাপোর্ট</h3>
-    <p>ফ্রি স্কিল ট্রেনিং, অসচ্ছলদের জন্য ছোট ব্যবসা সহায়তা, যুবসমাজের ক্যারিয়ার গাইডলাইন।</p>
-  </div>
-
-  <div class="work-card">
-    <h3>পরিবেশ ও মানবিক কার্যক্রম</h3>
-    <p>গাছ লাগানো, পরিচ্ছন্নতা অভিযান, রাস্তায় থাকা প্রাণীদের সহায়তা ও চিকিৎসা।</p>
-  </div>
-
   <p style="margin-top:15px;"><a href="work.html">সব কাজের বিস্তারিত দেখুন &raquo;</a></p>
 </div>
 
-<!-- Mobile-only 3-dot floating -->
+<!-- Mobile 3-dot Share -->
 <div class="share-dropdown">
   <span onclick="toggleShare()">⋮</span>
   <button onclick="sharePage()">Share Website</button>
@@ -216,26 +114,22 @@
 </footer>
 
 <script>
-  function toggleMenu() {
-    const menu = document.getElementById('mobileMenu');
-    menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-  }
+function toggleMenu(){
+  const menu = document.getElementById('mobileMenu');
+  menu.style.display = menu.style.display==='flex'?'none':'flex';
+}
 
-  function toggleShare() {
-    const btn = document.querySelector('.share-dropdown button');
-    btn.style.display = btn.style.display === 'block' ? 'none' : 'block';
-  }
+function toggleShare(){
+  const btn = document.querySelector('.share-dropdown button');
+  btn.style.display = btn.style.display==='block'?'none':'block';
+}
 
-  function sharePage() {
-    if (navigator.share) {
-      navigator.share({
-        title: document.title,
-        url: window.location.href
-      }).catch((error) => console.log('Error sharing', error));
-    } else {
-      alert('Your browser does not support the share feature.');
-    }
-  }
+function sharePage(){
+  if(navigator.share){
+    navigator.share({ title:document.title, url:window.location.href })
+      .catch(err=>console.log('Error sharing',err));
+  } else { alert('Your browser does not support the share feature.'); }
+}
 </script>
 
 </body>
