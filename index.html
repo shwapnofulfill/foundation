@@ -1,68 +1,199 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sopno Puron Foundation</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
-    <script src="firebase.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sopno Puron Foundation</title>
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+<script src="firebase.js"></script>
+
+<style>
+/* Hero & Colors */
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+    background: url('images/hero-bg.jpg') no-repeat center/cover;
+    color: white;
+}
+.hero h2 { font-size: 32px; margin-bottom: 10px; color: #fff; }
+.hero p { font-size: 18px; color: #fff; }
+
+/* Work Section */
+.section.work h2 {
+    color: #1e90ff;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.work-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.work-card h3 { color: #ff6b6b; margin-bottom: 8px; }
+.work-card ul { list-style-type: disc; padding-left: 20px; }
+.work-card li { margin-bottom: 6px; }
+
+/* Share Button Dropdown */
+.share-dropdown {
+    position: relative;
+    display: inline-block;
+}
+.share-dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #1e90ff;
+    min-width: 160px;
+    border-radius: 8px;
+    padding: 10px;
+    z-index: 1;
+}
+.share-dropdown-content button {
+    background: none;
+    color: #fff;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 8px 10px;
+    cursor: pointer;
+}
+.share-dropdown:hover .share-dropdown-content {
+    display: block;
+}
+
+/* Desktop: show button directly */
+@media(min-width:769px){
+    .share-dropdown { display: none; }
+    .share-btn-desktop { display: inline-block; margin-top: 15px; }
+}
+</style>
 </head>
+
 <body>
 
 <header>
-    <img src="images/logo.png" alt="Logo">
-    <h1>Sopno Puron Foundation</h1>
-    <span class="menu-icon" onclick="toggleMenu()">☰</span>
+<img src="images/logo.png" alt="Logo">
+<h1>Sopno Puron Foundation</h1>
+<span class="menu-icon" onclick="toggleMenu()">☰</span>
 </header>
 
 <nav id="mobileMenu">
-    <a href="index.html">Home</a>
-    <a href="about.html">About Us</a>
-    <a href="work.html">Our Work</a>
-    <a href="contact.html">Contact</a>
+<a href="index.html">Home</a>
+<a href="about.html">About Us</a>
+<a href="work.html">Our Work</a>
+<a href="contact.html">Contact</a>
 </nav>
 
+<!-- Hero Section -->
 <div class="hero">
-    <h2>স্বপ্ন পূরণের পথে আমরা</h2>
-    <p>দরিদ্র ও অসহায়দের জন্য শিক্ষা, স্বাস্থ্য, খাদ্য ও আবাসন নিশ্চিত করি।</p>
-    <button class="cta-buttons" onclick="sharePage()">Share This Website</button>
+<h2>আমরা স্বপ্ন পূরণের পথে</h2>
+<p>মানব কল্যাণের জন্য একসাথে এগিয়ে চলি</p>
+
+<!-- Share button desktop -->
+<button class="share-btn-desktop" onclick="sharePage()">Share This Website</button>
+
+<!-- Share button mobile 3-dot dropdown -->
+<div class="share-dropdown">
+<span style="font-size:25px;cursor:pointer;">⋮</span>
+<div class="share-dropdown-content">
+<button onclick="sharePage()">Share Website</button>
+</div>
+</div>
 </div>
 
-<div class="section">
-    <h2>আমাদের মূল সেবা</h2>
-    <div class="work-cards">
-        <div class="work-card">
-            <img src="images/work1.jpg" alt="Education">
-            <h3>শিক্ষা সহায়তা</h3>
-            <p>অর্থনৈতিকভাবে পিছিয়ে থাকা শিশুদের জন্য শিক্ষার সুযোগ ও বৃত্তি।</p>
-        </div>
-        <div class="work-card">
-            <img src="images/work2.jpg" alt="Health">
-            <h3>স্বাস্থ্য সেবা</h3>
-            <p>প্রয়োজনীয় চিকিৎসা, হাসপাতাল সেবা ও মেডিকেল ক্যাম্প আয়োজন।</p>
-        </div>
-        <div class="work-card">
-            <img src="images/work3.jpg" alt="Food">
-            <h3>খাদ্য ও আবাসন</h3>
-            <p>দরিদ্র ও অসহায়দের জন্য নিরাপদ আবাসন ও খাবারের ব্যবস্থা।</p>
-        </div>
-        <div class="work-card">
-            <img src="images/work4.jpg" alt="Social Development">
-            <h3>সামাজিক উন্নয়ন</h3>
-            <p>গ্রামীণ ও নগর এলাকার মানুষের জীবনমান উন্নয়নের প্রকল্প।</p>
-        </div>
-    </div>
+<!-- Our Work Section -->
+<div class="section work">
+<h2>✅ আমাদের কাজগুলো</h2>
 
-    <div class="cta-buttons">
-        <a href="donate.html">Donate Now</a>
-        <a href="volunteer.html">Become a Volunteer</a>
-    </div>
+<!-- Work Cards -->
+<div class="work-card">
+<h3>১) খাদ্য সহায়তা (Food Aid Program)</h3>
+<ul>
+<li>রাস্তা বা অসহায় মানুষের জন্য খাবার বিতরণ</li>
+<li>রমজান/শীত মৌসুমে বিশেষ খাবার বিতরণ</li>
+<li>বন্যা/ঝড়ে ক্ষতিগ্রস্ত পরিবারকে খাবার দেওয়া</li>
+</ul>
+</div>
+
+<div class="work-card">
+<h3>২) শিক্ষা সহায়তা (Education Support)</h3>
+<ul>
+<li>স্কুল সামগ্রী বিতরণ (খাতা, কলম, ব্যাগ)</li>
+<li>মেধাবী কিন্তু অসচ্ছল ছাত্রদের বৃত্তি</li>
+<li>ফ্রি টিউশন/এডুকেশন সাপোর্ট সেন্টার</li>
+<li>স্কুলে ভর্তি করানো, ড্রপআউট কমানো</li>
+</ul>
+</div>
+
+<div class="work-card">
+<h3>৩) স্বাস্থ্যসেবা (Health Camp & Awareness)</h3>
+<ul>
+<li>ফ্রি মেডিকেল ক্যাম্প</li>
+<li>ব্লাড ডোনেশন ক্যাম্প</li>
+<li>জরুরি চিকিৎসা সহায়তা</li>
+<li>স্বাস্থ্য সচেতনতা (স্যানিটেশন, হাইজিন, পানি বিশুদ্ধকরণ)</li>
+</ul>
+</div>
+
+<div class="work-card">
+<h3>৪) শীতবস্ত্র ও পোশাক বিতরণ</h3>
+<ul>
+<li>শীতের সময় কম্বল ও গরম কাপড় বিতরণ</li>
+<li>অসহায় পরিবারের জন্য ব্যবহারযোগ্য কাপড় দেওয়া</li>
+</ul>
+</div>
+
+<div class="work-card">
+<h3>৫) মহিলা ও শিশুদের সহায়তা</h3>
+<ul>
+<li>বিধবা/অসহায় নারীদের আর্থিক সহায়তা</li>
+<li>শিশুদের জন্য খাবার, খেলনা, শিক্ষা কার্যক্রম</li>
+<li>নিরাপত্তা ও সচেতনতা কর্মসূচি (Child Safety, Women Empowerment)</li>
+</ul>
+</div>
+
+<div class="work-card">
+<h3>৬) দুর্যোগ সহায়তা (Disaster Relief)</h3>
+<ul>
+<li>বন্যা, ঘূর্ণিঝড়, অগ্নিকাণ্ডে দ্রুত সহায়তা</li>
+<li>খাদ্য, ওষুধ, পানি, নিত্যপ্রয়োজনীয় সামগ্রী বিতরণ</li>
+</ul>
+</div>
+
+<div class="work-card">
+<h3>৭) রক্তদাতা টিম (Blood Donor Network)</h3>
+<ul>
+<li>জরুরি সময়ে রক্ত প্রদান</li>
+<li>অনলাইনে রক্তদাতার লিস্ট তৈরি</li>
+<li>নিয়মিত ব্লাড ডোনেশন ড্রাইভ</li>
+</ul>
+</div>
+
+<div class="work-card">
+<h3>৮) কর্মসংস্থান সহায়তা (Skill & Employment Support)</h3>
+<ul>
+<li>ফ্রি স্কিল ট্রেনিং (কম্পিউটার, সেলাই, ডিজিটাল মার্কেটিং)</li>
+<li>অসহায়দের জন্য ছোট ব্যবসা শুরু করার সহায়তা</li>
+<li>যুবসমাজের জন্য মোটিভেশন ও ক্যারিয়ার গাইডলাইন</li>
+</ul>
+</div>
+
+<div class="work-card">
+<h3>৯) পরিবেশ ও মানবিক কার্যক্রম</h3>
+<ul>
+<li>গাছ লাগানো</li>
+<li>পরিচ্ছন্নতা অভিযান</li>
+<li>রাস্তার প্রাণীর খাবার/চিকিৎসা</li>
+</ul>
+</div>
+
 </div>
 
 <footer>
-    Developed by 
-    <a href="https://facebook.com/rafahimn" target="_blank">RA Fahim</a>
+Developed by <a href="https://facebook.com/rafahimn" target="_blank">RA Fahim</a>
 </footer>
 
 </body>
