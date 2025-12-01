@@ -3,13 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact — Sopno Puron Foundation</title>
+<title>Contact - Sopno Puron Foundation</title>
 <link rel="stylesheet" href="style.css">
-<script src="script.js" defer></script>
 <script src="firebase.js"></script>
+<script>
+function submitContact(e){
+  e.preventDefault();
+  if(!window.db) return alert('Firebase not ready');
+  db.collection('contacts').add({
+    name: document.getElementById('c_name').value.trim(),
+    email: document.getElementById('c_email').value.trim(),
+    message: document.getElementById('c_msg').value.trim(),
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  }).then(()=>{
+    alert('Message sent. We will contact you soon.');
+    e.target.reset();
+  }).catch(err=> alert(err.message));
+}
+</script>
+<style>
+form{max-width:480px;margin:20px auto;padding:20px;background:#fff;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+input,textarea,button{width:100%;margin-bottom:12px;padding:10px;border-radius:6px;border:1px solid #ccc;}
+button{background:#1e90ff;color:#fff;border:none;cursor:pointer;}
+</style>
 </head>
 <body>
-
 <header>
 <img src="images/logo.png" alt="Logo">
 <h1>Sopno Puron Foundation</h1>
@@ -25,39 +43,16 @@
 
 <div class="section">
 <h2>Contact Us</h2>
-<p>আপনার প্রশ্ন বা পরামর্শ আমাদের জানান:</p>
-
 <form onsubmit="submitContact(event)">
-    <input id="c_name" type="text" placeholder="আপনার নাম" required>
-    <input id="c_email" type="email" placeholder="আপনার ইমেল" required>
-    <textarea id="c_msg" placeholder="আপনার বার্তা" required></textarea>
-    <button type="submit">Send</button>
+<input id="c_name" placeholder="Full Name" required>
+<input id="c_email" placeholder="Email" type="email" required>
+<textarea id="c_msg" placeholder="Your Message" required></textarea>
+<button type="submit">Send Message</button>
 </form>
-
-<button class="cta-buttons" onclick="sharePage()">Share This Website</button>
 </div>
 
 <footer>
-Developed by 
-<a href="https://facebook.com/rafahimn" target="_blank">RA Fahim</a>
+Developed by <a href="https://facebook.com/rafahimn" target="_blank">RA Fahim</a>
 </footer>
-
-<script>
-function submitContact(e){
-  e.preventDefault();
-  if(!window.db) return showAlert('Firebase not ready');
-
-  db.collection('contacts').add({
-    name: document.getElementById('c_name').value.trim(),
-    email: document.getElementById('c_email').value.trim(),
-    message: document.getElementById('c_msg').value.trim(),
-    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-  }).then(()=>{
-    alert('Message sent. We will contact you soon.');
-    e.target.reset();
-  }).catch(err=>showAlert(err.message));
-}
-</script>
-
 </body>
 </html>
