@@ -5,44 +5,135 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About Us - Sopno Puron Foundation</title>
 <link rel="stylesheet" href="style.css">
-<script src="script.js" defer></script>
 <script src="firebase.js"></script>
+<script src="script.js" defer></script>
 <style>
-.section h2 { color: #1e90ff; margin-bottom: 15px; text-align: center; }
-.section p { font-size: 16px; line-height: 1.6; margin-bottom: 12px; }
+/* Section Heading & Paragraph */
+.section h2 {
+  color: #1e90ff;
+  margin-bottom: 15px;
+  text-align: center;
+}
+.section p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+/* Desktop small Share text */
+.share-desktop {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 14px;
+  color: #4CAF50;
+  cursor: pointer;
+  z-index: 1000;
+  display: inline-block;
+}
+
+/* Mobile 3-dot Share Dropdown */
+.share-dropdown {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 1000;
+}
+
+.share-dropdown span {
+  font-size: 2rem;
+  cursor: pointer;
+  color: #4CAF50;
+}
+
+.share-dropdown button {
+  margin-top: 5px;
+  padding: 10px 15px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  display: none;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  transition: background 0.3s;
+}
+
+.share-dropdown button:hover {
+  background-color: #388E3C;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .share-desktop {
+    display: none;
+  }
+  .share-dropdown {
+    display: flex;
+  }
+}
 </style>
 </head>
 <body>
+
 <header>
-<img src="images/logo.png" alt="Logo">
-<h1>Sopno Puron Foundation</h1>
-<span class="menu-icon" onclick="toggleMenu()">☰</span>
+  <img src="images/logo.png" alt="Logo">
+  <h1>Sopno Puron Foundation</h1>
+  <span class="menu-icon" onclick="toggleMenu()">☰</span>
 </header>
 
 <nav id="mobileMenu">
-<a href="index.html">Home</a>
-<a href="about.html">About Us</a>
-<a href="work.html">Our Work</a>
-<a href="contact.html">Contact</a>
+  <a href="index.html">Home</a>
+  <a href="about.html">About Us</a>
+  <a href="work.html">Our Work</a>
+  <a href="contact.html">Contact</a>
 </nav>
 
-<div class="section">
-<h2>আমাদের সম্পর্কে</h2>
-<p><strong>Sopno Puron Foundation</strong> একটি অলাভজনক সংস্থা যা মানব কল্যাণ, শিক্ষা, স্বাস্থ্য, দুর্যোগ সহায়তা, রক্তদাতা নেটওয়ার্ক ও মহিলা/শিশুদের উন্নয়নে কাজ করে।</p>
-<p>আমাদের লক্ষ্য হলো সমাজের অসহায় মানুষদের সহায়তা প্রদান করা, শিক্ষিত ও সচেতন সমাজ গঠন করা এবং মানবিক কার্যক্রমের মাধ্যমে জীবনকে উন্নত করা।</p>
-<p>আমরা নিয়মিত বিভিন্ন প্রোগ্রাম ও ক্যাম্পের মাধ্যমে সমাজের যেকোনো অংশে সহায়তা পৌঁছে দেই।</p>
+<!-- Desktop Share Text -->
+<div class="share-desktop" onclick="sharePage()">Share</div>
 
-<button class="share-btn-desktop" onclick="sharePage()">Share This Website</button>
+<div class="section">
+  <h2>আমাদের সম্পর্কে</h2>
+  <p><strong>Sopno Puron Foundation</strong> একটি অলাভজনক সংস্থা যা মানব কল্যাণ, শিক্ষা, স্বাস্থ্য, দুর্যোগ সহায়তা, রক্তদাতা নেটওয়ার্ক ও মহিলা/শিশুদের উন্নয়নে কাজ করে।</p>
+  <p>আমাদের লক্ষ্য হলো সমাজের অসহায় মানুষদের সহায়তা প্রদান করা, শিক্ষিত ও সচেতন সমাজ গঠন করা এবং মানবিক কার্যক্রমের মাধ্যমে জীবনকে উন্নত করা।</p>
+  <p>আমরা নিয়মিত বিভিন্ন প্রোগ্রাম ও ক্যাম্পের মাধ্যমে সমাজের যেকোনো অংশে সহায়তা পৌঁছে দেই।</p>
+</div>
+
+<!-- Mobile-only 3-dot Share -->
 <div class="share-dropdown">
-<span style="font-size:25px;cursor:pointer;">⋮</span>
-<div class="share-dropdown-content">
-<button onclick="sharePage()">Share Website</button>
-</div>
-</div>
+  <span onclick="toggleShare()">⋮</span>
+  <button onclick="sharePage()">Share Website</button>
 </div>
 
 <footer>
-Developed by <a href="https://facebook.com/rafahimn" target="_blank">RA Fahim</a>
+  Developed by <a href="https://facebook.com/rafahimn" target="_blank">RA Fahim</a>
 </footer>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+  }
+
+  function toggleShare() {
+    const btn = document.querySelector('.share-dropdown button');
+    btn.style.display = btn.style.display === 'block' ? 'none' : 'block';
+  }
+
+  function sharePage() {
+    if (navigator.share) {
+      navigator.share({
+        title: document.title,
+        url: window.location.href
+      }).catch((error) => console.log('Error sharing', error));
+    } else {
+      alert('Your browser does not support the share feature.');
+    }
+  }
+</script>
+
 </body>
 </html>
