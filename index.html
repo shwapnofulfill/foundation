@@ -7,78 +7,236 @@
 <link rel="stylesheet" href="style.css">
 <script src="firebase.js"></script>
 <script src="script.js" defer></script>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+  }
+
+  header img {
+    height: 50px;
+  }
+
+  header h1 {
+    margin: 0 10px;
+    font-size: 1.5rem;
+  }
+
+  .menu-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none;
+  }
+
+  nav {
+    background-color: #2e7d32;
+    display: flex;
+    justify-content: center;
+  }
+
+  nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: block;
+  }
+
+  nav a:hover {
+    background-color: #1b5e20;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 50px 20px;
+    background: url('images/hero-bg.jpg') center/cover no-repeat;
+    color: white;
+  }
+
+  .section {
+    padding: 30px 20px;
+    max-width: 900px;
+    margin: auto;
+  }
+
+  .work-card {
+    background-color: #f1f1f1;
+    padding: 15px 20px;
+    margin: 15px 0;
+    border-radius: 8px;
+  }
+
+  .share-dropdown {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .share-dropdown span {
+    font-size: 2rem;
+    cursor: pointer;
+  }
+
+  .share-dropdown button {
+    margin-top: 5px;
+    padding: 8px 12px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #2e7d32;
+    color: white;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .menu-icon {
+      display: block;
+    }
+
+    nav {
+      display: none;
+      flex-direction: column;
+    }
+
+    nav a {
+      padding: 10px;
+      border-top: 1px solid #1b5e20;
+    }
+
+    .share-dropdown {
+      display: flex;
+    }
+  }
+</style>
 </head>
 <body>
 
 <header>
-<img src="images/logo.png" alt="Logo">
-<h1>Sopno Puron Foundation</h1>
-<span class="menu-icon" onclick="toggleMenu()">☰</span>
+  <img src="images/logo.png" alt="Logo">
+  <h1>Sopno Puron Foundation</h1>
+  <span class="menu-icon" onclick="toggleMenu()">☰</span>
 </header>
 
 <nav id="mobileMenu">
-<a href="index.html">Home</a>
-<a href="about.html">About Us</a>
-<a href="work.html">Our Work</a>
-<a href="contact.html">Contact</a>
+  <a href="index.html">Home</a>
+  <a href="about.html">About Us</a>
+  <a href="work.html">Our Work</a>
+  <a href="contact.html">Contact</a>
 </nav>
 
 <div class="hero">
-<h2>আমরা স্বপ্ন পূরণের পথে</h2>
-<p>মানব কল্যাণের জন্য একসাথে এগিয়ে চলি</p>
+  <h2>আমরা স্বপ্ন পূরণের পথে</h2>
+  <p>মানব কল্যাণের জন্য একসাথে এগিয়ে চলি</p>
 </div>
 
 <div class="section">
-<h2>Welcome to Sopno Puron Foundation</h2>
-<p>Our mission is to help people in need—health, food, education, shelter & social development.</p>
+  <h2>Welcome to Sopno Puron Foundation</h2>
+  <p>Our mission is to help people in need—health, food, education, shelter & social development.</p>
 </div>
 
 <!-- Work Summary Section -->
 <div class="section">
-<h2>আমাদের কাজের সংক্ষিপ্ত বিবরণ</h2>
+  <h2>আমাদের কাজের সংক্ষিপ্ত বিবরণ</h2>
 
-<div class="work-card">
-<h3>খাদ্য সহায়তা</h3>
-<p>রাস্তায় থাকা মানুষ ও দুর্যোগে ক্ষতিগ্রস্ত পরিবারদের জন্য খাবার বিতরণ।</p>
-</div>
+  <div class="work-card">
+    <h3>খাদ্য সহায়তা</h3>
+    <p>রাস্তায় থাকা মানুষ ও দুর্যোগে ক্ষতিগ্রস্ত পরিবারদের জন্য খাবার বিতরণ।</p>
+  </div>
 
-<div class="work-card">
-<h3>শিক্ষা সহায়তা</h3>
-<p>অসহায় শিক্ষার্থীদের স্কুল সামগ্রী, বৃত্তি, ফ্রি টিউশন এবং ভর্তি সহায়তা।</p>
-</div>
+  <div class="work-card">
+    <h3>শিক্ষা সহায়তা</h3>
+    <p>অসহায় শিক্ষার্থীদের স্কুল সামগ্রী, বৃত্তি, ফ্রি টিউশন এবং ভর্তি সহায়তা।</p>
+  </div>
 
-<div class="work-card">
-<h3>স্বাস্থ্যসেবা</h3>
-<p>ফ্রি মেডিকেল ক্যাম্প, ব্লাড ডোনেশন এবং স্বাস্থ্য সচেতনতা কার্যক্রম।</p>
-</div>
+  <div class="work-card">
+    <h3>স্বাস্থ্যসেবা</h3>
+    <p>ফ্রি মেডিকেল ক্যাম্প, ব্লাড ডোনেশন এবং স্বাস্থ্য সচেতনতা কার্যক্রম।</p>
+  </div>
 
-<div class="work-card">
-<h3>শীতবস্ত্র ও পোশাক বিতরণ</h3>
-<p>শীতকালে কম্বল ও পোশাক বিতরণ, অসহায় পরিবারের সহায়তা।</p>
-</div>
+  <div class="work-card">
+    <h3>শীতবস্ত্র ও পোশাক বিতরণ</h3>
+    <p>শীতকালে কম্বল ও পোশাক বিতরণ, অসহায় পরিবারের সহায়তা।</p>
+  </div>
 
-<div class="work-card">
-<h3>মহিলা ও শিশু সহায়তা</h3>
-<p>বিধবা ও শিশুদের জন্য আর্থিক সহায়তা, খাবার, খেলনা ও শিক্ষা কার্যক্রম।</p>
-</div>
+  <div class="work-card">
+    <h3>মহিলা ও শিশু সহায়তা</h3>
+    <p>বিধবা ও শিশুদের জন্য আর্থিক সহায়তা, খাবার, খেলনা ও শিক্ষা কার্যক্রম।</p>
+  </div>
 
-<div class="work-card">
-<h3>দুর্যোগ সহায়তা</h3>
-<p>বন্যা, ঝড়, অগ্নিকাণ্ডে দ্রুত সহায়তা এবং নিত্যপ্রয়োজনীয় সামগ্রী বিতরণ।</p>
-</div>
+  <div class="work-card">
+    <h3>দুর্যোগ সহায়তা</h3>
+    <p>বন্যা, ঝড়, অগ্নিকাণ্ডে দ্রুত সহায়তা এবং নিত্যপ্রয়োজনীয় সামগ্রী বিতরণ।</p>
+  </div>
 
-<p style="margin-top:15px;"><a href="work.html">সব কাজের বিস্তারিত দেখুন &raquo;</a></p>
+  <div class="work-card">
+    <h3>রক্তদাতা টিম</h3>
+    <p>জরুরি সময়ে মানুষকে রক্ত দেওয়া, অনলাইনে রক্তদাতার লিস্ট, নিয়মিত ব্লাড ডোনেশন ড্রাইভ।</p>
+  </div>
+
+  <div class="work-card">
+    <h3>কর্মসংস্থান ও স্কিল সাপোর্ট</h3>
+    <p>ফ্রি স্কিল ট্রেনিং, অসচ্ছলদের জন্য ছোট ব্যবসা সহায়তা, যুবসমাজের ক্যারিয়ার গাইডলাইন।</p>
+  </div>
+
+  <div class="work-card">
+    <h3>পরিবেশ ও মানবিক কার্যক্রম</h3>
+    <p>গাছ লাগানো, পরিচ্ছন্নতা অভিযান, রাস্তায় থাকা প্রাণীদের সহায়তা ও চিকিৎসা।</p>
+  </div>
+
+  <p style="margin-top:15px;"><a href="work.html">সব কাজের বিস্তারিত দেখুন &raquo;</a></p>
 </div>
 
 <!-- Mobile-only 3-dot floating -->
 <div class="share-dropdown">
-  <span>⋮</span>
+  <span onclick="toggleShare()">⋮</span>
   <button onclick="sharePage()">Share Website</button>
 </div>
 
 <footer>
-Developed by <a href="https://facebook.com/rafahimn" target="_blank">RA Fahim</a>
+  Developed by <a href="https://facebook.com/rafahimn" target="_blank">RA Fahim</a>
 </footer>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+  }
+
+  function toggleShare() {
+    const btn = document.querySelector('.share-dropdown button');
+    btn.style.display = btn.style.display === 'block' ? 'none' : 'block';
+  }
+
+  function sharePage() {
+    if (navigator.share) {
+      navigator.share({
+        title: document.title,
+        url: window.location.href
+      }).catch((error) => console.log('Error sharing', error));
+    } else {
+      alert('Your browser does not support the share feature.');
+    }
+  }
+</script>
 
 </body>
 </html>
