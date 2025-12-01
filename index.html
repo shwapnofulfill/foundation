@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -20,7 +19,11 @@ header {
   padding:10px 20px;
 }
 
-header img { height:50px; }
+header img { height:80px; } /* Desktop logo বড় */
+@media(max-width:768px){
+  header img { height:60px; } /* Mobile logo ছোট */
+}
+
 header h1 { margin-left:10px; font-size:1.5rem; }
 .menu-icon { font-size:1.5rem; cursor:pointer; display:none; }
 
@@ -86,7 +89,7 @@ footer { text-align:center; padding:15px; background:#2e7d32; color:white; }
 
 <div class="section">
   <h2>স্বপ্ন পূরণ ফাউন্ডেশনে আপনাকে স্বাগতম</h2>
-  <p>আমাদের লক্ষ্য হলো প্রয়োজনে থাকা মানুষের সাহায্য করা—স্বাস্থ্য, খাদ্য, শিক্ষা, আশ্রয় এবং সামাজিক উন্নয়নের ক্ষেত্রে।.</p>
+  <p>আমাদের লক্ষ্য হলো প্রয়োজনে থাকা মানুষের সাহায্য করা—স্বাস্থ্য, খাদ্য, শিক্ষা, আশ্রয় এবং সামাজিক উন্নয়নের ক্ষেত্রে।</p>
 </div>
 
 <!-- Work Summary Section -->
@@ -100,7 +103,7 @@ footer { text-align:center; padding:15px; background:#2e7d32; color:white; }
 
   <div class="work-card">
     <h3>শিক্ষা সহায়তা</h3>
-    <p>অসহায় শিক্ষার্থীদের স্কুল সামগ্রী,ফ্রি টিউশন এবং ভর্তি সহায়তা।</p>
+    <p>অসহায় শিক্ষার্থীদের স্কুল সামগ্রী, ফ্রি টিউশন এবং ভর্তি সহায়তা।</p>
   </div>
 
   <div class="work-card">
@@ -137,6 +140,7 @@ footer { text-align:center; padding:15px; background:#2e7d32; color:white; }
     <h3>পরিবেশ ও মানবিক কার্যক্রম</h3>
     <p>গাছ লাগানো, পরিচ্ছন্নতা অভিযান, রাস্তায় থাকা প্রাণীদের সহায়তা ও চিকিৎসা।</p>
   </div>
+
   <p style="margin-top:15px;"><a href="work.html">সব কাজের বিস্তারিত দেখুন &raquo;</a></p>
 </div>
 
