@@ -1,1 +1,142 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<title>Admin Dashboard — Sopno Puron</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<style>
+.admin-wrap{max-width:1100px;margin:20px auto;padding:18px;background:#fff;border-radius:10px;}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.card{flex:1;min-width:260px;padding:12px;border-radius:8px;background:#f7fbff}
+table{width:100%;border-collapse:collapse}
+th,td{padding:8px;border-bottom:1px solid #eee}
+.muted{color:#666;font-size:0.95rem}
+.btn-small{padding:6px 8px;border-radius:6px;background:#0d6efd;color:#fff;border:none;cursor:pointer}
+.danger{background:#d9534f}
+#loginBox{max-width:420px;margin:40px auto;padding:20px}
+</style>
+</head>
+<body>
 
+<header style="background:#0d6efd;color:white;padding:18px;text-align:center">
+  <h2>Admin Dashboard — Sopno Puron Foundation</h2>
+</header>
+
+<div id="main">
+  <div id="loginBox" class="admin-wrap">
+    <h3>Admin Login</h3>
+    <p class="muted">Firebase Authentication ব্যবহার করে লগইন করুন।</p>
+    <input id="admin_email" placeholder="Admin email" type="email">
+    <input id="admin_pass" placeholder="Password" type="password">
+    <div style="margin-top:10px">
+      <button id="loginBtn" class="btn-small">Login</button>
+      <button id="logoutBtn" class="btn-small" style="display:none;background:#666">Logout</button>
+    </div>
+    <p id="authNote" class="muted"></p>
+  </div>
+
+  <div id="dashArea" style="display:none">
+    <div class="admin-wrap">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h3>Welcome, Admin</h3>
+        <button id="signOut" class="btn-small">Sign out</button>
+      </div>
+
+      <div class="row" style="margin-top:12px">
+        <div class="card">
+          <h4>Donations</h4>
+          <div id="donationsList" style="max-height:300px;overflow:auto"></div>
+        </div>
+        <div class="card">
+          <h4>Volunteers</h4>
+          <div id="volunteersList" style="max-height:300px;overflow:auto"></div>
+        </div>
+        <div class="card">
+          <h4>Contacts</h4>
+          <div id="contactsList" style="max-height:300px;overflow:auto"></div>
+        </div>
+        <div class="card">
+          <h4>Blood Donors</h4>
+          <div id="donorsList" style="max-height:300px;overflow:auto"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="firebase.js"></script>
+<script>
+let loginBtn = document.getElementById('loginBtn');
+let dashArea = document.getElementById('dashArea');
+let loginBox = document.getElementById('loginBox');
+let authNote = document.getElementById('authNote');
+
+function waitForFirebaseReady(cb){
+    if(window.auth && window.db) return cb();
+    setTimeout(()=>waitForFirebaseReady(cb),200);
+}
+
+waitForFirebaseReady(()=> {
+    auth.onAuthStateChanged(user=>{
+      if(user){
+        loginBox.style.display='none';
+        dashArea.style.display='block';
+        loadAllCollections();
+      } else {
+        loginBox.style.display='block';
+        dashArea.style.display='none';
+      }
+    });
+});
+
+loginBtn.addEventListener('click',()=>{
+    const email = document.getElementById('admin_email').value.trim();
+    const pass = document.getElementById('admin_pass').value.trim();
+    if(!email||!pass){ authNote.textContent='Enter email & password'; return; }
+    auth.signInWithEmailAndPassword(email, pass)
+      .then(()=> authNote.textContent='Logged in')
+      .catch(err=> authNote.textContent='Login error: '+err.message);
+});
+
+document.getElementById('signOut').addEventListener('click', ()=>{ auth.signOut(); });
+
+function loadAllCollections(){
+    loadCollection('donations','donationsList');
+    loadCollection('volunteers','volunteersList');
+    loadCollection('contacts','contactsList');
+    loadCollection('blood_donors','donorsList');
+}
+
+function loadCollection(colName, containerId){
+    const container = document.getElementById(containerId);
+    container.innerHTML = '<div class="muted">Loading...</div>';
+    db.collection(colName).orderBy('createdAt','desc').limit(200).get()
+      .then(snapshot=>{
+        if(snapshot.empty){ container.innerHTML = '<div class="muted">No records</div>'; return; }
+        let html = '<table><thead><tr><th>When</th><th>Data</th><th>Action</th></tr></thead><tbody>';
+        snapshot.forEach(doc=>{
+          const d = doc.data();
+          const t = d.createdAt && d.createdAt.toDate ? d.createdAt.toDate().toLocaleString() : '';
+          html += `<tr>
+            <td style="white-space:nowrap">${t}</td>
+            <td style="max-width:420px"><pre style="white-space:pre-wrap;font-family:inherit">${escapeHtml(JSON.stringify(d,null,2))}</pre></td>
+            <td><button class="btn-small danger" onclick="deleteDoc('${colName}','${doc.id}')">Delete</button></td>
+          </tr>`;
+        });
+        html += '</tbody></table>';
+        container.innerHTML = html;
+      }).catch(err=>{ container.innerHTML = 'Error: '+err.message; });
+}
+
+function deleteDoc(col, id){
+    if(!confirm('Delete this record?')) return;
+    db.collection(col).doc(id).delete().then(()=> loadCollection(col, col==='donations'?'donationsList': col==='volunteers'?'volunteersList': col==='contacts'?'contactsList':'donorsList') )
+    .catch(err=> alert('Delete error: '+err.message));
+}
+
+function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+</script>
+
+</body>
+</html>
