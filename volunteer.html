@@ -1,53 +1,15 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volunteer — Sopno Puron Foundation</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
-    <script src="firebase.js"></script>
-</head>
-<body>
-
-<header>
-    <img src="images/logo.png" alt="Logo">
-    <h1>Sopno Puron Foundation</h1>
-    <span class="menu-icon" onclick="toggleMenu()">☰</span>
-</header>
-
-<nav id="mobileMenu">
-    <a href="index.html">Home</a>
-    <a href="about.html">About Us</a>
-    <a href="work.html">Our Work</a>
-    <a href="contact.html">Contact</a>
-</nav>
-
-<div class="section">
-    <h2>Become a Volunteer</h2>
-    <p>আপনি যদি মানব কল্যাণে স্বেচ্ছাসেবক হতে চান, নিচের ফর্ম পূরণ করুন:</p>
-
-    <form onsubmit="submitVolunteer(event)">
-        <input id="vol_name" type="text" placeholder="আপনার নাম" required>
-        <input id="vol_phone" type="text" placeholder="মোবাইল নাম্বার" required>
-        <input id="vol_address" type="text" placeholder="ঠিকানা" required>
-        <textarea id="vol_skills" placeholder="আপনার দক্ষতা / আগ্রহ"></textarea>
-        <button type="submit">Submit</button>
-    </form>
-
-    <button class="cta-buttons" onclick="sharePage()">Share This Website</button>
-</div>
-
-<footer>
-    Developed by 
-    <a href="https://facebook.com/rafahimn" target="_blank">RA Fahim</a>
-</footer>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volunteer - Sopno Puron Foundation</title>
+<link rel="stylesheet" href="style.css">
+<script src="firebase.js"></script>
 <script>
 function submitVolunteer(e){
   e.preventDefault();
-  if(!window.db) return showAlert('Firebase not ready');
-
+  if(!window.db) return alert('Firebase not ready');
   const data = {
     name: document.getElementById('vol_name').value.trim(),
     phone: document.getElementById('vol_phone').value.trim(),
@@ -58,9 +20,42 @@ function submitVolunteer(e){
   db.collection('volunteers').add(data).then(()=>{
     alert('Volunteer request submitted. Thank you!');
     e.target.reset();
-  }).catch(err=>showAlert(err.message));
+  }).catch(err=>alert(err.message));
 }
 </script>
+<style>
+form{max-width:480px;margin:20px auto;padding:20px;background:#fff;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+input,textarea,select,button{width:100%;margin-bottom:12px;padding:10px;border-radius:6px;border:1px solid #ccc;}
+button{background:#1e90ff;color:#fff;border:none;cursor:pointer;}
+</style>
+</head>
+<body>
+<header>
+<img src="images/logo.png" alt="Logo">
+<h1>Sopno Puron Foundation</h1>
+<span class="menu-icon" onclick="toggleMenu()">☰</span>
+</header>
 
+<nav id="mobileMenu">
+<a href="index.html">Home</a>
+<a href="about.html">About Us</a>
+<a href="work.html">Our Work</a>
+<a href="contact.html">Contact</a>
+</nav>
+
+<div class="section">
+<h2>Volunteer Registration</h2>
+<form onsubmit="submitVolunteer(event)">
+<input id="vol_name" placeholder="Full Name" required>
+<input id="vol_phone" placeholder="Phone Number" required>
+<input id="vol_address" placeholder="Address" required>
+<textarea id="vol_skills" placeholder="Skills / Interests"></textarea>
+<button type="submit">Submit</button>
+</form>
+</div>
+
+<footer>
+Developed by <a href="https://facebook.com/rafahimn" target="_blank">RA Fahim</a>
+</footer>
 </body>
 </html>
